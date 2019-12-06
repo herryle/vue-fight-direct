@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>可编辑表格</title>
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css"
+      rel="stylesheet"
+    />
+    <style media="screen">
+      .table {
+        text-align: center;
+      }
+      table {
+        table-layout: fixed; /*首行统一宽度*/
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <div class="header-item">
+          <!-- 这里是@change 不是:change -->
+          <el-select v-model="id" @change="changeValue" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item._id"
+              :label="item.date"
+              :value="item._id"
+            >
+            </el-option>
+          </el-select>
+          <el-button @click="model.iteminfo.push({})">新增表单</el-button>
+          <el-button @click="model.iteminfo.push({})">新增作战对象</el-button>
+          <el-button @click="save">保存</el-button>
+          <el-button @click="update">更新</el-button>
+          <el-button @click="publish">发布</el-button>
+        </div>
+      </div>
+      <div class="table">
+        <table class="table table-bordered " id="table">
+          <thead>
+            <tr class="info">
+              <td>序号</td>
+              <td colspan="2">作战对象</td>
+              <td>管道情况</td>
+              <td>问题清单</td>
+              <td>整改前报告</td>
+              <td>整改后报告</td>
+              <td>备注</td>
+            </tr>
+          </thead>
+          <tbody v-for="(item,index)  in  model.iteminfo" :key="index">
+            <tr index="{{i}}">
+              <td rowspan="5">
+                <span class="num">{{index}}</span>
+              </td>
+              <td rowspan="5">
+                <!-- <el-input v-model="item.road_name" type="textarea"></el-input> -->
+                <textarea
+                  v-model="item.road_name"
+                  style="height:300px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
+                ></textarea>
+              </td>
+              <td><span class="ysgx">雨水管线</span></td>
+              <td>
+                <textarea
+                  v-model="item.ys_state"
+                  style="height:150px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
+                ></textarea>
+              </td>
+              <td rowspan="5">
+                <textarea
+                  v-model="item.issus_list"
+                  style="height:300px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
+                ></textarea>
+              </td>
+              <td rowspan="5" data-role="correct_list_before">
+                <el-upload class="upload-demo"> </el-upload>
+              </td>
+              <td rowspan="5" data-role="correct_list_after">
+                <el-upload class="upload-demo"> </el-upload>
+              </td>
+              <td data-role="remark" rowspan="5">
+                <textarea
+                  v-model="item.remark"
+                  style="height:300px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
+                ></textarea>
+              </td>
+            </tr>
+            <tr index="${i}">
+              <td rowspan="5">
+                <span class="wsgx">污水管线</span>
+              </td>
+              <td rowspan="5">
+                <textarea
+                  v-model="item.ws_state"
+                  style="height:150px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
+                ></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./js/vue.js"></script>
+  </body>
+</html>
