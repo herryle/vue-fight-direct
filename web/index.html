@@ -81,7 +81,7 @@
                 <el-form @submit.native.prevent>
                   <el-upload
                     class="upload-demo"
-                    action="http://localhost:3001/api/rest/upload"
+                    action="http://127.0.0.1:3001/api/rest/upload"
                     :show-file-list="false"
                     :on-success="res=>item.list_before_url.push({
                       name: res.filename,
@@ -109,7 +109,7 @@
                   <el-upload
                     class="upload-demo"
                     :show-file-list="false"
-                    action="http://localhost:3001/api/rest/upload"
+                    action="http://127.0.0.1:3001/api/rest/upload"
                     :on-success="res=>item.list_after_url.push({
                       name: res.filename,
                       url: res.url
