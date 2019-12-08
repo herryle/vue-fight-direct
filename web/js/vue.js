@@ -55,7 +55,7 @@ const vm = new Vue({
     async add() {
       axios.defaults.headers.common['Authorization'] =
         'Bearer ' + sessionStorage.token || ''
-      fetch('http://122.51.172.167:89/web/lib/fightinfo.json')
+      fetch('http://122.51.172.167:89/lib/fightinfo.json')
         .then(res => {
           return res.json()
         })
