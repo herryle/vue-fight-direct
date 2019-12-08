@@ -18,9 +18,7 @@ const vm = new Vue({
   },
   methods: {
     async fetch() {
-      const res = await axios.get(
-        `http://122.51.172.167:3001/api/rest/fightinfo`
-      )
+      const res = await axios.get(`http://127.0.0.1:3001/api/rest/fightinfo`)
       this.options = res.data
       this.value = dayjs(this.options[this.options.length - 1].date).format(
         'YYYY-MM-DD HH:mm:ss'
@@ -32,7 +30,7 @@ const vm = new Vue({
     },
     async fetchItems(id) {
       const res = await axios.get(
-        `http://122.51.172.167:3001/api/rest/fightinfo/${id}`
+        `http://127.0.0.1:3001/api/rest/fightinfo/${id}`
       )
       this.model = res.data
     },
@@ -40,7 +38,7 @@ const vm = new Vue({
       axios.defaults.headers.common['Authorization'] =
         'Bearer ' + sessionStorage.token || ''
       const res = await axios.put(
-        `http://122.51.172.167:3001/api/rest/fightinfo/${this.id}`,
+        `http://127.0.0.1:3001/api/rest/fightinfo/${this.id}`,
         this.model
       )
       if (res.data.status == 401) {
@@ -62,7 +60,7 @@ const vm = new Vue({
         .then(async data => {
           data.date = new Date()
           const res = await axios.post(
-            `http://122.51.172.167:3001/api/rest/fightinfo`,
+            `http://127.0.0.1:3001/api/rest/fightinfo`,
             data
           )
           if (res.data.status == 401) {
@@ -82,7 +80,7 @@ const vm = new Vue({
     },
     async login() {
       const res = await axios.post(
-        `http://122.51.172.167:3001/api/rest/user/login`,
+        `http://127.0.0.1:3001/api/rest/user/login`,
         this.form
       )
       if (res.data.hasOwnProperty('token')) {

@@ -46,17 +46,12 @@ module.exports = app => {
     res.send(items)
   })
 
-  app.post(
-    '/api/rest/upload',
-    authMiddleWare(),
-    upload.single('file'),
-    async (req, res) => {
-      const file = req.file
-      const name = file.filename
-      file.url = `http://localhost:3001/uploads/${name}`
-      await res.send(file)
-    }
-  )
+  app.post('/api/rest/upload', upload.single('file'), async (req, res) => {
+    const file = req.file
+    const name = file.filename
+    file.url = `http://127.0.0.1:3001/uploads/${name}`
+    await res.send(file)
+  })
 
   app.use('/api/rest/fightinfo', router)
 }
