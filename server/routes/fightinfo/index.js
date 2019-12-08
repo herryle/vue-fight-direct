@@ -45,8 +45,8 @@ module.exports = app => {
   })
 
   app.post('/api/rest/upload', upload.single('file'), async (req, res) => {
-    file.url = `http://122.51.172.167:3001/uploads/${req.file.filename}`
-    await res.send(file)
+    req.file.url = `http://122.51.172.167:3001/uploads/${req.file.filename}`
+    await res.send(req.file)
   })
 
   app.use('/api/rest/fightinfo', router)
