@@ -15,7 +15,7 @@ module.exports = options => {
     if (!userid) {
       return res.send({
         status: 401,
-        message: '用户名不存在'
+        message: '用户不存在'
       })
     }
     next()

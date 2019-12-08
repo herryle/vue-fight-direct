@@ -105,8 +105,7 @@ const vm = new Vue({
         type: 'success',
         message: '作战对象成功添加'
       })
-    },
-    async publish() {}
+    }
   },
   created() {
     this.fetch()

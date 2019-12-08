@@ -4,7 +4,6 @@ module.exports = app => {
 
   const FightInfo = require('../../models/FightInfo')
   const router = express.Router({
-    //mergeParams 保存父路由params  默认false  本例中可以从子路由中读取req.params.resource的参数
     mergeParams: true
   })
 
@@ -19,9 +18,10 @@ module.exports = app => {
     }
   })
   //添加配置文件到muler对象。
-  var upload = multer({
+  const upload = multer({
     storage: storage
   })
+
   const authMiddleWare = require('../../middleware/auth')
 
   router.post('/', authMiddleWare(), async (req, res) => {
@@ -35,21 +35,17 @@ module.exports = app => {
   })
 
   router.get('/:id', async (req, res) => {
-    //req.params 获取前台url传来的参数
     const items = await FightInfo.findById(req.params.id)
     res.send(items)
   })
 
   router.get('/', async (req, res) => {
-    //req.params 获取前台url传来的参数
     const items = await FightInfo.find()
     res.send(items)
   })
 
   app.post('/api/rest/upload', upload.single('file'), async (req, res) => {
-    const file = req.file
-    const name = file.filename
-    file.url = `http://122.51.172.167:3001/uploads/${name}`
+    file.url = `http://122.51.172.167:3001/uploads/${req.file.filename}`
     await res.send(file)
   })
 

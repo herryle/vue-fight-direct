@@ -23,7 +23,7 @@
       <div class="header">
         <div class="header-item">
           <!-- 这里是@change 不是:change -->
-          <el-select v-model="value" @change="changeValue" placeholder="请选择">
+          <el-select v-model="value" @change="changeValue">
             <el-option
               v-for="item in options"
               :key="item._id"
@@ -33,9 +33,7 @@
             </el-option>
           </el-select>
           <el-button @click="add">新增表单</el-button>
-
           <el-button @click="addItem">新增作战对象</el-button>
-          <!-- <el-button @click="save">保存</el-button> -->
           <el-button @click="update">保存</el-button>
           <!-- <el-button @click="publish">发布</el-button> -->
         </div>
@@ -78,6 +76,8 @@
                 ></textarea>
               </td>
               <td rowspan="5" class="correct_list_before">
+                <!-- .native 表示对一个组件绑定系统原生事件
+                  .prevent 表示提交以后不刷新页面 -->
                 <el-form @submit.native.prevent>
                   <el-upload
                     class="upload-demo"
