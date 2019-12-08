@@ -49,7 +49,7 @@ module.exports = app => {
   app.post('/api/rest/upload', upload.single('file'), async (req, res) => {
     const file = req.file
     const name = file.filename
-    file.url = `http://127.0.0.1:3001/uploads/${name}`
+    file.url = `http://122.51.172.167:3001/uploads/${name}`
     await res.send(file)
   })
 
