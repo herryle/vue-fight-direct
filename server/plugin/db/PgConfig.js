@@ -1,10 +1,10 @@
 module.exports = app => {
   const pgOpt = require('pg')
   const pgConfig = {
-    user: 'postgres',
-    database: 'xcgis',
-    password: 'dwigis',
-    host: '47.105.220.147',
+    user: 'user',
+    database: 'database',
+    password: 'password',
+    host: 'localhost',
     port: '5432',
     poolSize: 5,
     poolIdleTimeout: 30000,
