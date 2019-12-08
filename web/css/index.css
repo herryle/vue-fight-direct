@@ -42,3 +42,11 @@ textarea {
 .wsgx {
   line-height: 150px;
 }
+
+ul {
+  list-style: none;
+  margin-top: 3rem;
+}
+ul li {
+  margin-top: 1rem;
+}

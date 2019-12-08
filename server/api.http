@@ -1,0 +1,32 @@
+@url=http://localhost:3001/api/rest/
+@json=Content-Type: application/json
+
+
+
+###
+GET {{url}}fightinfo
+
+
+
+###
+POST   {{url}}user/register
+{{json}}
+
+{
+ "username":"admin",
+ "password":"123456" 
+}
+
+###
+
+POST {{url}}user/login
+{{json}}
+
+{
+  "username":"admin",
+ "password":"1234567" 
+}
+
+###
+
+GET  {{url}}articles

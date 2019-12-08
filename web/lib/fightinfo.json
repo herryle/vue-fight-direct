@@ -1,0 +1,41 @@
+{
+  "date": "",
+  "iteminfo": [
+    {
+      "road_name": "百乐路",
+      "road_lat": 118,
+      "road_lng": 32,
+      "ys_state": "百乐路雨水情况",
+      "ws_state": "百乐路污水情况",
+      "issus_list": "百乐路问题清单",
+      "correct_list_before": "",
+      "correct_list_after": "",
+      "remark": "",
+      "ispublic": false
+    },
+    {
+      "road_name": "泰冯路",
+      "road_lat": 118,
+      "road_lng": 32,
+      "ys_state": "泰冯路雨水情况",
+      "ws_state": "泰冯路污水情况",
+      "issus_list": "泰冯路问题清单",
+      "correct_list_before": "",
+      "correct_list_after": "",
+      "remark": "",
+      "ispublic": false
+    },
+    {
+      "road_name": "欣欣路",
+      "road_lat": 118,
+      "road_lng": 32,
+      "ys_state": "欣欣路雨水情况",
+      "ws_state": "欣欣路污水情况",
+      "issus_list": "欣欣路问题清单",
+      "correct_list_before": "",
+      "correct_list_after": "",
+      "remark": "",
+      "ispublic": false
+    }
+  ]
+}

@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 //创建模型
 const schema = new mongoose.Schema({
-  name: { type: String },
   date: { type: Date },
   iteminfo: [
     {
@@ -12,8 +11,8 @@ const schema = new mongoose.Schema({
       ys_state: { type: String },
       ws_state: { type: String },
       issus_list: { type: String },
-      correct_list_before: { type: String },
-      correct_list_after: { type: String },
+      list_before_url: [{ name: { type: String }, url: { type: String } }],
+      list_after_url: [{ name: { type: String }, url: { type: String } }],
       remark: { type: String },
       ispublic: false
     }

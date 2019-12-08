@@ -23,20 +23,21 @@
       <div class="header">
         <div class="header-item">
           <!-- 这里是@change 不是:change -->
-          <el-select v-model="id" @change="changeValue" placeholder="请选择">
+          <el-select v-model="value" @change="changeValue" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item._id"
-              :label="item.date"
+              :label="dayjs(item.date).format('YYYY-MM-DD HH:mm:ss')"
               :value="item._id"
             >
             </el-option>
           </el-select>
-          <el-button @click="model.iteminfo.push({})">新增表单</el-button>
-          <el-button @click="model.iteminfo.push({})">新增作战对象</el-button>
-          <el-button @click="save">保存</el-button>
-          <el-button @click="update">更新</el-button>
-          <el-button @click="publish">发布</el-button>
+          <el-button @click="add">新增表单</el-button>
+
+          <el-button @click="addItem">新增作战对象</el-button>
+          <!-- <el-button @click="save">保存</el-button> -->
+          <el-button @click="update">保存</el-button>
+          <!-- <el-button @click="publish">发布</el-button> -->
         </div>
       </div>
       <div class="table">
@@ -55,10 +56,9 @@
           <tbody v-for="(item,index)  in  model.iteminfo" :key="index">
             <tr index="{{i}}">
               <td rowspan="5">
-                <span class="num">{{index}}</span>
+                <span class="num">{{index+1}}</span>
               </td>
               <td rowspan="5">
-                <!-- <el-input v-model="item.road_name" type="textarea"></el-input> -->
                 <textarea
                   v-model="item.road_name"
                   style="height:300px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
@@ -77,11 +77,58 @@
                   style="height:300px; width:100%; overflow-x:hidden;text-overflow: ellipsis;"
                 ></textarea>
               </td>
-              <td rowspan="5" data-role="correct_list_before">
-                <el-upload class="upload-demo"> </el-upload>
+              <td rowspan="5" class="correct_list_before">
+                <el-form @submit.native.prevent>
+                  <el-upload
+                    class="upload-demo"
+                    action="http://localhost:3001/api/rest/upload"
+                    :show-file-list="false"
+                    :on-success="res=>item.list_before_url.push({
+                      name: res.filename,
+                      url: res.url
+                    })"
+                    multiple
+                  >
+                    <el-button size="small" type="primary" native-type="submit"
+                      >点击上传</el-button
+                    >
+                  </el-upload>
+                  <ul>
+                    <li v-for="i in item.list_before_url">
+                      <!-- 在vue中动态绑定一定要加上冒号 ： 一定！！！！ 绑定的就不需要加大双括号 -->
+                      <a :href="i.url">
+                        <span>{{i.name}}</span>
+                      </a>
+                    </li>
+                  </ul>
+                </el-form>
               </td>
-              <td rowspan="5" data-role="correct_list_after">
-                <el-upload class="upload-demo"> </el-upload>
+              <td rowspan="5" class="list_after_url">
+                <!-- @submit.native.prevent 组织默认表单提交刷新-->
+                <el-form @submit.native.prevent>
+                  <el-upload
+                    class="upload-demo"
+                    :show-file-list="false"
+                    action="http://localhost:3001/api/rest/upload"
+                    :on-success="res=>item.list_after_url.push({
+                      name: res.filename,
+                      url: res.url
+                    })"
+                    multiple
+                  >
+                    <el-button size="small" type="primary" native-type="submit"
+                      >点击上传</el-button
+                    >
+                  </el-upload>
+                  <ul>
+                    <li v-for="i in item.list_after_url">
+                      <!-- 在vue中动态绑定一定要加上冒号 ： 一定！！！！ 绑定的就不需要加大双括号-->
+                      <a :href="i.url">
+                        <span>{{i.name}}</span>
+                      </a>
+                    </li>
+                  </ul>
+                </el-form>
               </td>
               <td data-role="remark" rowspan="5">
                 <textarea
@@ -104,10 +151,33 @@
           </tbody>
         </table>
       </div>
+      <el-dialog
+        title="请先登录"
+        :visible.sync="dialogFormVisible"
+        width="40rem"
+      >
+        <el-form :model="form">
+          <el-form-item label="用户名">
+            <el-input v-model="form.username"></el-input>
+          </el-form-item>
+          <el-form-item label="密码">
+            <el-input
+              type="password"
+              v-model="form.password"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="login">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.16/dayjs.min.js"></script>
     <script src="./js/vue.js"></script>
   </body>
 </html>
