@@ -94,7 +94,7 @@
               <textarea class="remark" v-model="item.remark" placeholder="请填写相关内容"></textarea>
             </td>
             <td rowspan="5">
-              <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text">移除</el-button>
+              <el-button @click.native.prevent="deleteRow(index)" type="text">移除</el-button>
             </td>
           </tr>
           <tr index="${i}">
@@ -153,7 +153,9 @@ export default {
       const res = await this.$http.get(`fightinfo`)
       this.options = res.data
       for (let i = 0; i < this.options.length; i++) {
-        this.options[i].date = dayjs(this.options[i].date).format('YYYY-MM-DD HH:mm:ss')
+        this.options[i].date = dayjs(this.options[i].date).format(
+          'YYYY-MM-DD HH:mm:ss'
+        )
       }
       this.value = dayjs(this.options[0].date).format('YYYY-MM-DD HH:mm:ss')
       this.id = this.options[0]._id
@@ -164,7 +166,9 @@ export default {
       this.model = res.data
     },
     async addForm() {
-      const res = await this.$http.get(`http://localhost:3001/json/fightinfo.json`)
+      const res = await this.$http.get(
+        `http://localhost:3001/json/fightinfo.json`
+      )
       this.item = res.data
       this.item.date = new Date()
       await this.$http.post(`fightinfo`, this.item)
@@ -199,7 +203,9 @@ export default {
         type: 'success',
         message: res.data.message
       })
-      this.fetch()
+    },
+    async deleteRow(index) {
+      this.model.iteminfo.splice(index, 1)
     }
   },
   created() {
