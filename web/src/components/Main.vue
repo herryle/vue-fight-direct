@@ -22,6 +22,7 @@
             <td>整改前报告</td>
             <td>整改后报告</td>
             <td colspan="2">备注</td>
+            <td>操作</td>
           </tr>
         </thead>
         <tbody v-for="(item,index)  in  model.iteminfo" :key="index">
@@ -91,6 +92,9 @@
             </td>
             <td data-role="remark" rowspan="5" colspan="2">
               <textarea class="remark" v-model="item.remark" placeholder="请填写相关内容"></textarea>
+            </td>
+            <td rowspan="5">
+              <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text">移除</el-button>
             </td>
           </tr>
           <tr index="${i}">
