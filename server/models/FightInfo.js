@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 //创建模型
 const schema = new mongoose.Schema({
   date: { type: Date },
-  ispublic: { type: Boolean },
   iteminfo: [
     {
       road_name: { type: String },

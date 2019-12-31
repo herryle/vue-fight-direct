@@ -1,24 +1,19 @@
 module.exports = app => {
   const express = require('express')
   const multer = require('multer')
-  const jwt = require('jsonwebtoken')
-
   const FightInfo = require('../../models/FightInfo')
   const router = express.Router({
     mergeParams: true
   })
 
   const storage = multer.diskStorage({
-    //设置上传后文件路径，uploads文件夹会自动创建。
     destination: (req, file, cb) => {
       cb(null, './uploads')
     },
-    //给上传文件重命名，获取添加后缀名
     filename: (req, file, cb) => {
       cb(null, file.originalname)
     }
   })
-  //添加配置文件到muler对象。
   const upload = multer({
     storage: storage
   })
@@ -26,12 +21,12 @@ module.exports = app => {
   const authMiddleWare = require('../../middleware/auth')
 
   router.post('/', authMiddleWare(), async (req, res) => {
-    const model = await FightInfo.create(req.body)
+    await FightInfo.create(req.body)
     res.send({ message: '表单成功添加' })
   })
 
   router.put('/:id', authMiddleWare(), async (req, res) => {
-    const model = await FightInfo.findByIdAndUpdate(req.params.id, req.body)
+    await FightInfo.findByIdAndUpdate(req.params.id, req.body)
     res.send({ message: '保存成功' })
   })
 
@@ -41,14 +36,6 @@ module.exports = app => {
   })
 
   router.get('/', async (req, res) => {
-    //判断有无token
-    const token = String(req.headers.authorization || '')
-      .split(' ')
-      .pop()
-    if (token === 'undefined' || token === '') {
-      const items = await FightInfo.find({ ispublic: true }).sort({ date: -1 })
-      return res.send(items)
-    }
     const items = await FightInfo.find().sort({ date: -1 })
     res.send(items)
   })
