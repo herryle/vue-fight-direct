@@ -1,6 +1,7 @@
 module.exports = app => {
   const express = require('express')
   const multer = require('multer')
+  const jwt = require('jsonwebtoken')
 
   const FightInfo = require('../../models/FightInfo')
   const router = express.Router({
@@ -40,12 +41,20 @@ module.exports = app => {
   })
 
   router.get('/', async (req, res) => {
-    const items = await FightInfo.find()
+    //判断有无token
+    const token = String(req.headers.authorization || '')
+      .split(' ')
+      .pop()
+    if (token === 'undefined' || token === '') {
+      const items = await FightInfo.find({ ispublic: true }).sort({ date: -1 })
+      return res.send(items)
+    }
+    const items = await FightInfo.find().sort({ date: -1 })
     res.send(items)
   })
 
   app.post('/api/rest/upload', upload.single('file'), async (req, res) => {
-    req.file.url = `http://122.51.172.167:3001/uploads/${req.file.filename}`
+    req.file.url = `http://localhost:3001/uploads/${req.file.filename}`
     await res.send(req.file)
   })
 

@@ -24,7 +24,7 @@ POST {{url}}user/login
 
 {
   "username":"admin",
- "password":"1234567" 
+ "password":"123456" 
 }
 
 ###

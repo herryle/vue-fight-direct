@@ -1,0 +1,99 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Microsoft YaHei', 'SF Pro Display', Roboto, Noto, Arial,
+    'PingFang SC', sans-serif;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.header-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 4rem;
+}
+
+table {
+  table-layout: fixed; /*首行统一宽度*/
+}
+
+textarea {
+  border: none;
+  outline: none;
+  background: none;
+  resize: none;
+}
+
+.table {
+  text-align: center;
+}
+.tr-header {
+  background-color: #cecece;
+}
+.num {
+  line-height: 300px;
+  font-weight: 900;
+}
+
+.ysgx,
+.wsgx {
+  line-height: 150px;
+  font-weight: 900;
+}
+
+.roadname {
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  font-weight: 900;
+}
+
+.ysstate {
+  height: 150px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.issuslist {
+  height: 300px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.wsstate {
+  height: 150px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.remark {
+  height: 300px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+ul {
+  list-style: none;
+  margin-top: 3rem;
+}
+ul li {
+  margin-top: 1rem;
+}

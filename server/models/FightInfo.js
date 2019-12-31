@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 //创建模型
 const schema = new mongoose.Schema({
   date: { type: Date },
+  ispublic: { type: Boolean },
   iteminfo: [
     {
       road_name: { type: String },
@@ -13,8 +14,7 @@ const schema = new mongoose.Schema({
       issus_list: { type: String },
       list_before_url: [{ name: { type: String }, url: { type: String } }],
       list_after_url: [{ name: { type: String }, url: { type: String } }],
-      remark: { type: String },
-      ispublic: false
+      remark: { type: String }
     }
   ]
 })
